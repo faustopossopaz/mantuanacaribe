@@ -3,13 +3,155 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>mantuanacaribe</title>
+  <title>Mantuana Caribe — Próximamente</title>
+  <meta name="description" content="Muy pronto podrás conocer nuestras elaboraciones y realizar tus pedidos de forma sencilla.">
+  <!-- Página provisional: se pide a los buscadores que no la indexen. Quitar esta línea al publicar la web real. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f1ddc6">
+  <meta property="og:title" content="Mantuana Caribe — Próximamente">
+  <meta property="og:description" content="Muy pronto podrás conocer nuestras elaboraciones y realizar tus pedidos de forma sencilla.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fondo.webp" as="image" type="image/webp">
+  <link rel="preload" href="/fonts/cinzel-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
   <style>
+    @font-face {
+      font-family: "Cinzel";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("/fonts/cinzel-latin-400-normal.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Cinzel";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("/fonts/cinzel-latin-500-normal.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Alegreya";
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url("/fonts/alegreya-latin-400-italic.woff2") format("woff2");
+    }
+
+    /* Colores tomados del logo */
+    :root {
+      --c-navy: #0d2266;
+      --c-red: #bd2246;
+      --c-wall: #f1ddc6;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
     html, body { height: 100%; margin: 0; }
-    body { display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; }
+
+    body {
+      display: grid;
+      align-items: center;
+      justify-items: start;
+      min-height: 100vh;
+      min-height: 100svh;
+      /* Alineado a la izquierda, sobre la pared lisa de la foto. El padding inferior reserva la
+         franja azul y la mesa (abajo en la foto), donde el texto oscuro no se lee bien. */
+      padding: 28px 24px 30vh clamp(24px, 10vw, 190px);
+      padding-bottom: 30svh;
+      background: var(--c-wall) url("/fondo.webp") center / cover no-repeat;
+      color: var(--c-navy);
+      font-family: "Alegreya", Georgia, serif;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      display: grid;
+      justify-items: center;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    .logo {
+      display: block;
+      width: auto;
+      height: clamp(210px, 38svh, 420px);
+      max-width: 82vw;
+      object-fit: contain;
+    }
+
+    h1 {
+      margin: clamp(20px, 4vh, 36px) 0 0;
+      color: var(--c-red);
+      font-family: "Cinzel", Georgia, serif;
+      font-size: clamp(1.05rem, 3.2vw, 1.5rem);
+      font-weight: 500;
+      letter-spacing: 0.42em;
+      /* Compensa el espacio que deja el último carácter y centra el texto de verdad */
+      padding-left: 0.42em;
+      text-transform: uppercase;
+    }
+
+    .rule {
+      display: block;
+      width: 48px;
+      height: 1px;
+      margin: clamp(14px, 2.6vh, 24px) 0;
+      background: var(--c-navy);
+      opacity: 0.5;
+    }
+
+    p {
+      margin: 0;
+      max-width: 28ch;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    h1, p {
+      /* Un halo suave del color de la pared mejora la lectura sobre las sombras de las hojas */
+      text-shadow: 0 0 14px rgba(255, 240, 222, 0.85), 0 0 4px rgba(255, 240, 222, 0.7);
+    }
+
+    /* Móvil: contenido centrado y la foto desplazada hacia la pared */
+    @media (max-width: 760px) {
+      body {
+        justify-items: center;
+        padding: 24px 24px 30vh;
+        padding-bottom: 30svh;
+        background-position: 12% center;
+      }
+    }
+
+    /* Entrada suave; se desactiva si el usuario pidió menos movimiento */
+    @media (prefers-reduced-motion: no-preference) {
+      .logo, h1, .rule, p {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      h1 { animation-delay: 0.2s; }
+      .rule { animation-delay: 0.35s; animation-name: rise-rule; }
+      p { animation-delay: 0.5s; }
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes rise-rule {
+      to { opacity: 0.5; transform: none; }
+    }
   </style>
 </head>
 <body>
-  <h1>mantuanacaribe test</h1>
+  <main>
+    <img class="logo" src="/logo.webp" width="749" height="900" alt="Mantuana Caribe">
+    <h1>Próximamente</h1>
+    <span class="rule" aria-hidden="true"></span>
+    <p>Muy pronto podrás conocer nuestras elaboraciones y realizar tus pedidos de forma sencilla.</p>
+  </main>
 </body>
 </html>
